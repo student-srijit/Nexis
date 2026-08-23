@@ -6,7 +6,7 @@ import {
   Zap, TrendingUp, RotateCcw
 } from 'lucide-react'
 import { useStore } from '../utils/store'
-import { getCurrentPath, getMastery, submitQuiz, replanPath } from '../utils/api'
+import { getCurrentPath, getMastery, submitQuiz, replanPath, generatePath } from '../utils/api'
 import MasteryRadar from '../components/MasteryRadar'
 import PathTimeline from '../components/PathTimeline'
 import CourseCard from '../components/CourseCard'
@@ -47,6 +47,11 @@ export default function Dashboard() {
 
   const loadDashboard = async () => {
     setLoading(true)
+    // Immediately show stored path if available so UI isn't blank
+    if (currentPath) {
+      setPath(currentPath)
+      setLocalMastery(storedMastery)
+    }
     try {
       const [pathRes, masteryRes] = await Promise.all([
         getCurrentPath(learnerId),
@@ -61,10 +66,25 @@ export default function Dashboard() {
         setPath(currentPath)
         setLocalMastery(storedMastery)
       } else {
-        toast.error('Could not load path. Using demo data.')
-        setPath(getDemoPath())
-        setLocalMastery({ s_python: 0.2, s_stats: 0.4, s_ml: 0.1, s_dl: 0.05, s_sql: 0.6, s_data_viz: 0.3, s_pandas: 0.25 })
+        // No path at all — leave path as null so we can show a generate button
+        setPath(null)
+        setLocalMastery(storedMastery)
       }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleGeneratePath = async () => {
+    setLoading(true)
+    try {
+      toast.loading('Generating your personalized path…', { id: 'gen' })
+      const pathRes = await generatePath(learnerId)
+      setPath(pathRes.data)
+      setCurrentPath(pathRes.data)
+      toast.success('🎉 Path generated!', { id: 'gen' })
+    } catch (err) {
+      toast.error('Could not generate path: ' + (err.response?.data?.detail || err.message), { id: 'gen' })
     } finally {
       setLoading(false)
     }
@@ -229,7 +249,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    {path?.steps?.map((step, i) => (
+                    {path?.steps?.length > 0 ? path.steps.map((step, i) => (
                       <CourseCard
                         key={step.course_id || i}
                         step={step}
@@ -240,10 +260,21 @@ export default function Dashboard() {
                           setActiveTab('chat')
                         }}
                       />
-                    )) || (
-                      <div className="glass-card" style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>
-                        <BookOpen size={40} style={{ marginBottom: '12px' }} />
-                        <p>No path loaded. Try refreshing.</p>
+                    )) : (
+                      <div className="glass-card" style={{ padding: '48px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                        <BookOpen size={48} style={{ marginBottom: '16px', color: 'var(--accent-purple-light)', opacity: 0.5 }} />
+                        <h3 style={{ marginBottom: '8px', color: 'var(--text-primary)' }}>No path generated yet</h3>
+                        <p style={{ marginBottom: '24px', fontSize: '0.875rem', maxWidth: '360px', margin: '0 auto 24px' }}>
+                          Click below to run the full ML pipeline — gap analysis, BKT mastery scoring, and LightGBM ranking — and generate your personalized learning path.
+                        </p>
+                        <button
+                          onClick={handleGeneratePath}
+                          className="btn-primary"
+                          id="generate-path-btn"
+                          style={{ justifyContent: 'center', padding: '12px 28px' }}
+                        >
+                          <Zap size={16} /> Generate My Learning Path
+                        </button>
                       </div>
                     )}
                   </div>

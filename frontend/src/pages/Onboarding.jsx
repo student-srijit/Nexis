@@ -56,8 +56,24 @@ export default function Onboarding() {
       const quizRes = await submitQuiz(learnerId, responses)
       setMastery(quizRes.data.skill_updates || {})
 
-      // Generate path
-      const pathRes = await generatePath(learnerId)
+      // Generate path — retry up to 3x with 3s gaps in case the recommender
+      // is still loading on a cold Render instance
+      let pathRes = null
+      let lastErr = null
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          pathRes = await generatePath(learnerId)
+          break
+        } catch (err) {
+          lastErr = err
+          if (attempt < 3) {
+            await new Promise(r => setTimeout(r, 3000))
+          }
+        }
+      }
+
+      if (!pathRes) throw lastErr
+
       setCurrentPath(pathRes.data)
       setStorePhase('dashboard')
       toast.success('🎉 Your personalized learning path is ready!')
