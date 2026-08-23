@@ -33,3 +33,9 @@
 ## Interpretation
 
 AUC > 0.7 indicates the BKT model meaningfully predicts whether a learner will answer correctly given their interaction history. We use BKT in production (not DKT) because the inference cost is O(1) per update vs O(T) for the LSTM, and the AUC difference is within noise on this dataset size.
+
+## DKT (Stretch Goal)
+
+**LSTM AUC**: 0.8526
+
+Deep Knowledge Tracing achieved higher representation capacity on complex sequences, but BKT is still computationally cheaper for O(1) single-step inference.

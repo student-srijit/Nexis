@@ -57,6 +57,9 @@ class Recommender:
         course_ids_path = os.path.join(recommender_dir, "course_ids.json")
         ranker_path = os.path.join(recommender_dir, "ranker.pkl")
         skill_emb_path = os.path.join(recommender_dir, "skill_embeddings.pkl")
+        n2v_path = os.path.join(recommender_dir, "..", "node2vec.model")
+        
+        self._n2v = None
 
         # Always load encoder (needed at inference)
         self._load_encoder()
@@ -81,6 +84,14 @@ class Recommender:
         if os.path.exists(skill_emb_path):
             with open(skill_emb_path, "rb") as f:
                 self._skill_embeddings = pickle.load(f)
+
+        if os.path.exists(n2v_path):
+            try:
+                from gensim.models import Word2Vec
+                self._n2v = Word2Vec.load(n2v_path)
+                logger.info("Loaded Node2Vec structural embeddings")
+            except Exception as e:
+                logger.warning("Could not load Node2Vec: %s", e)
 
         logger.info("Recommender loaded: %d courses", len(self._course_ids))
 
@@ -200,6 +211,18 @@ class Recommender:
         query_emb = np.mean(skill_vecs, axis=0)
         query_emb = query_emb / (np.linalg.norm(query_emb) + 1e-9)
 
+        # Build structural query embedding from Node2Vec (Stretch Goal)
+        query_struct = np.zeros(32, dtype=np.float32)
+        if getattr(self, "_n2v", None) is not None:
+            struct_vecs = []
+            for skill_id, weight in priorities:
+                if skill_id in self._n2v.wv:
+                    struct_vecs.append(self._n2v.wv[skill_id] * weight)
+            if struct_vecs:
+                query_struct = np.mean(struct_vecs, axis=0)
+                if np.linalg.norm(query_struct) > 1e-9:
+                    query_struct = query_struct / np.linalg.norm(query_struct)
+
         # Retrieve candidates
         candidates = self._retrieve_candidates(query_emb, top_k=min(50, max(20, top_k * 5)))
 
@@ -224,13 +247,27 @@ class Recommender:
             priority = max((w for s, w in priorities if s in course_skills), default=0.2)
             learner_mastery_avg = np.mean([mastery.get(s, 0.2) for s in course_skills]) if course_skills else 0.2
 
+            # Compute structural similarity (Node2Vec) and fuse
+            struct_sim = 0.0
+            if getattr(self, "_n2v", None) is not None and course_skills:
+                c_struct_vecs = [self._n2v.wv[s] for s in course_skills if s in self._n2v.wv]
+                if c_struct_vecs and np.linalg.norm(query_struct) > 1e-9:
+                    c_struct = np.mean(c_struct_vecs, axis=0)
+                    if np.linalg.norm(c_struct) > 1e-9:
+                        c_struct = c_struct / np.linalg.norm(c_struct)
+                        struct_sim = float(np.dot(query_struct, c_struct))
+            
+            fused_sim = content_sim
+            if getattr(self, "_n2v", None) is not None:
+                fused_sim = 0.7 * content_sim + 0.3 * struct_sim
+
             if self._ranker is not None:
                 feats = self._build_features(
-                    course_id, content_sim, priority, float(learner_mastery_avg), diff_num
+                    course_id, fused_sim, priority, float(learner_mastery_avg), diff_num
                 ).reshape(1, -1)
                 ranker_score = float(self._ranker.predict(feats)[0])
             else:
-                ranker_score = content_sim * (1.0 - float(learner_mastery_avg) + 0.1)
+                ranker_score = fused_sim * (1.0 - float(learner_mastery_avg) + 0.1)
 
             results.append({
                 "course_id": course_id,

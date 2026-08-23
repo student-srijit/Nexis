@@ -142,6 +142,33 @@ def build_skill_graph():
 
     logger.info("OK Skill graph saved: %d nodes, %d edges",
                 sg.G.number_of_nodes(), sg.G.number_of_edges())
+                
+    # --- 7. Stretch Goal: Node2Vec Embeddings ---
+    logger.info("Generating random walks for Node2Vec...")
+    import random
+    from gensim.models import Word2Vec
+    
+    walks = []
+    nodes = list(sg.G.nodes())
+    for _ in range(10): # num walks per node
+        random.shuffle(nodes)
+        for node in nodes:
+            walk = [str(node)]
+            curr = node
+            for _ in range(20): # walk length
+                neighbors = list(sg.G.neighbors(curr))
+                if not neighbors:
+                    break
+                curr = random.choice(neighbors)
+                walk.append(str(curr))
+            walks.append(walk)
+            
+    logger.info("Training Word2Vec on %d walks...", len(walks))
+    # vector_size matches our text embedding size or similar (32 to be light)
+    w2v = Word2Vec(walks, vector_size=32, window=5, min_count=0, sg=1, workers=1, epochs=10)
+    w2v.save(str(PROCESSED / "node2vec.model"))
+    logger.info("Saved Node2Vec model to %s", PROCESSED / "node2vec.model")
+    
     return sg
 
 
