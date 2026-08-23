@@ -96,12 +96,14 @@ class Recommender:
         logger.info("Recommender loaded: %d courses", len(self._course_ids))
 
     def _load_encoder(self):
+        """Lazy loader — called at load() time but catches all errors gracefully."""
         try:
             from sentence_transformers import SentenceTransformer
             self._encoder = SentenceTransformer("all-MiniLM-L6-v2")
             logger.info("Loaded MiniLM encoder")
         except Exception as e:
-            logger.warning("Could not load SentenceTransformer: %s", e)
+            logger.warning("Could not load SentenceTransformer at startup: %s — will retry on first encode call", e)
+            self._encoder = None
 
     def _build_faiss_index(self):
         try:
@@ -120,11 +122,17 @@ class Recommender:
     # Encode                                                                #
     # ------------------------------------------------------------------ #
 
-    def _encode(self, texts: List[str]) -> np.ndarray:
-        if self._encoder:
-            return self._encoder.encode(texts, normalize_embeddings=True, show_progress_bar=False)
-        # Fallback: random unit vectors (dev only)
-        return np.random.randn(len(texts), 384).astype(np.float32)
+    def _encode(self, texts: list) -> np.ndarray:
+        if self._encoder is None:
+            # Retry loading if it failed at startup (e.g., cold-start race condition)
+            try:
+                from sentence_transformers import SentenceTransformer
+                self._encoder = SentenceTransformer("all-MiniLM-L6-v2")
+                logger.info("MiniLM encoder loaded on demand")
+            except Exception as e:
+                logger.warning("SentenceTransformer still unavailable: %s — using random vecs", e)
+                return np.random.randn(len(texts), 384).astype(np.float32)
+        return self._encoder.encode(texts, normalize_embeddings=True, show_progress_bar=False)
 
     def _get_skill_embedding(self, skill_id: str, skill_label: str) -> np.ndarray:
         if skill_id in self._skill_embeddings:

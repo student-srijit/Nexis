@@ -20,6 +20,7 @@ load_dotenv()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize heavy singletons once at startup."""
+    import asyncio
     print("[START] Nexis starting up...")
     await init_db()
 
@@ -27,16 +28,21 @@ async def lifespan(app: FastAPI):
     app.state.skill_graph = SkillGraph()
     app.state.skill_graph.load(os.getenv("SKILL_GRAPH_PATH", "data/processed/skill_graph.pkl"))
 
-    # Load mastery model (pre-trained BKT per skill)
+    # Load mastery model (pre-trained BKT per skill) — fast
     app.state.mastery_model = MasteryModel()
     app.state.mastery_model.load(os.getenv("BKT_MODEL_DIR", "data/processed/bkt_models"))
 
-    import asyncio
-    # Load recommender (FAISS index + LightGBM ranker) — in thread to avoid PyTorch/asyncio deadlock on Windows
+    # Load recommender — in background so Render health checks pass immediately
     app.state.recommender = Recommender()
-    await asyncio.to_thread(app.state.recommender.load, os.getenv("RECOMMENDER_DIR", "data/processed/recommender"))
 
-    print("[OK] All components loaded.")
+    async def _load_recommender():
+        recommender_dir = os.getenv("RECOMMENDER_DIR", "data/processed/recommender")
+        await asyncio.to_thread(app.state.recommender.load, recommender_dir)
+        print("[OK] Recommender loaded in background.")
+
+    asyncio.create_task(_load_recommender())
+
+    print("[OK] Core components loaded. Recommender loading in background.")
     yield
     print("[STOP] Nexis shutting down.")
 
