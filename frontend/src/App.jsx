@@ -24,10 +24,17 @@ const TOAST_STYLE = {
 
 function AppInner() {
   const { user, authLoading } = useAuth()
-  const { phase, setPhase, learnerId, setLearnerId, setCurrentPath, setProfile, setMastery } = useStore()
+  const { phase, setPhase, learnerId, setLearnerId, setCurrentPath, setProfile, setMastery, currentPath } = useStore()
 
   // When a Firebase user signs in, use their UID as the learner ID
   // and load their existing data from Firestore
+  useEffect(() => {
+    // If we have a stored path already (e.g. from previous session) — go straight to dashboard
+    if (currentPath?.steps?.length > 0 && phase !== 'dashboard') {
+      setPhase('dashboard')
+    }
+  }, [])
+
   useEffect(() => {
     if (!user) return
     if (user.uid !== learnerId) {
@@ -41,7 +48,7 @@ function AppInner() {
           getUserProfile(user.uid),
         ])
         if (savedProfile) setProfile(savedProfile)
-        if (savedPath) {
+        if (savedPath?.steps?.length > 0) {
           setCurrentPath(savedPath)
           setPhase('dashboard')
         }

@@ -41,7 +41,9 @@ export const useStore = create(
         profile: state.profile,
         mastery: state.mastery,
         currentPath: state.currentPath,
-        phase: state.phase === 'dashboard' ? 'dashboard' : 'landing', // persist dashboard only
+        // Only persist 'dashboard' phase — everything else resets to 'landing' on reload
+        // so users are never stuck on login/onboarding screens after a refresh
+        phase: state.phase === 'dashboard' ? 'dashboard' : 'landing',
       }),
     }
   )
