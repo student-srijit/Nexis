@@ -83,11 +83,9 @@ export default function Onboarding() {
       setCurrentPath(pathRes.data)
 
       // Sync to Firestore so data survives backend restarts
-      try {
-        await saveUserProfile(learnerId, { goal: goalInput })
-        await saveUserPath(learnerId, pathRes.data)
-        await saveUserMastery(learnerId, quizRes.data.skill_updates || {})
-      } catch (_) { /* Firestore unavailable — data in local state */ }
+      await saveUserProfile(learnerId, { goal: goalInput })
+      await saveUserPath(learnerId, pathRes.data)
+      await saveUserMastery(learnerId, quizRes.data.skill_updates || {})
 
       setStorePhase('dashboard')
       toast.success('🎉 Your personalized learning path is ready!')

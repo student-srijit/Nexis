@@ -42,42 +42,32 @@ const withTimeout = (promise, ms = 2500) => {
 }
 
 export const saveUserProfile = async (uid, profileData) => {
-  try {
-    setDoc(doc(db, 'users', uid, 'data', 'profile'), {
-      ...profileData,
-      updatedAt: serverTimestamp(),
-    }, { merge: true }).catch(e => console.warn('Firestore async save:', e))
-  } catch (e) { console.warn('Firestore saveUserProfile error:', e) }
+  await setDoc(doc(db, 'users', uid, 'data', 'profile'), {
+    ...profileData,
+    updatedAt: serverTimestamp(),
+  }, { merge: true })
 }
 
 export const getUserProfile = async (uid) => {
-  try {
-    const snap = await withTimeout(getDoc(doc(db, 'users', uid, 'data', 'profile')))
-    return snap.exists() ? snap.data() : null
-  } catch (e) { return null }
+  const snap = await withTimeout(getDoc(doc(db, 'users', uid, 'data', 'profile')))
+  return snap.exists() ? snap.data() : null
 }
 
 export const saveUserPath = async (uid, pathData) => {
-  try {
-    setDoc(doc(db, 'users', uid, 'data', 'currentPath'), {
-      ...pathData,
-      savedAt: serverTimestamp(),
-    }, { merge: true }).catch(e => console.warn('Firestore async save:', e))
-  } catch (e) { console.warn('Firestore saveUserPath error:', e) }
+  await setDoc(doc(db, 'users', uid, 'data', 'currentPath'), {
+    ...pathData,
+    savedAt: serverTimestamp(),
+  }, { merge: true })
 }
 
 export const getUserPath = async (uid) => {
-  try {
-    const snap = await withTimeout(getDoc(doc(db, 'users', uid, 'data', 'currentPath')))
-    return snap.exists() ? snap.data() : null
-  } catch (e) { return null }
+  const snap = await withTimeout(getDoc(doc(db, 'users', uid, 'data', 'currentPath')))
+  return snap.exists() ? snap.data() : null
 }
 
 export const saveUserMastery = async (uid, mastery) => {
-  try {
-    setDoc(doc(db, 'users', uid, 'data', 'mastery'), {
-      skills: mastery,
-      updatedAt: serverTimestamp(),
-    }, { merge: true }).catch(e => console.warn('Firestore async save:', e))
-  } catch (e) { console.warn('Firestore saveUserMastery error:', e) }
+  await setDoc(doc(db, 'users', uid, 'data', 'mastery'), {
+    skills: mastery,
+    updatedAt: serverTimestamp(),
+  }, { merge: true })
 }

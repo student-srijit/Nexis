@@ -56,8 +56,13 @@ function AppInner() {
         } else if (currentPhase === 'landing' || currentPhase === 'login') {
           setPhase('onboarding')
         }
-      } catch (_) {
-        // Firestore unavailable — continue with local state
+      } catch (err) {
+        console.error('Firestore restore error:', err)
+        if (err.message !== 'Firestore timeout') {
+          import('react-hot-toast').then(({ default: toast }) => {
+            toast.error(`Firestore Error: ${err.message || 'Check database rules'}`)
+          })
+        }
         const currentPhase = useStore.getState().phase
         if (currentPhase === 'landing' || currentPhase === 'login') {
           setPhase('onboarding')
