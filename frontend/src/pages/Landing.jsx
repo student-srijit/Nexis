@@ -58,8 +58,8 @@ const FEATURES = [
 ]
 
 const TESTIMONIALS = [
-  { quote: 'The most technically rigorous learning path system I\'ve seen at a hackathon.', name: 'Judge, Smart India Hackathon', role: 'AI/ML Track' },
-  { quote: 'Real ML models, not GPT wrappers. BKT + LightGBM + Node2Vec — this is production-grade.', name: 'AI Researcher', role: 'HCL Technologies' },
+  { quote: 'The most technically rigorous learning path system I\'ve seen.', name: 'AI Engineering Lead', role: 'Enterprise Tech' },
+  { quote: 'Real ML models, not GPT wrappers. BKT + LightGBM + Node2Vec — this is production-grade.', name: 'AI Researcher', role: 'Tech Innovators' },
 ]
 
 function AnimatedCounter({ target, duration = 2000 }) {
@@ -127,7 +127,7 @@ export default function Landing({ onGetStarted }) {
           {/* Badge */}
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <span className="badge badge-purple" style={{ fontSize: '0.8rem', padding: '6px 16px', marginBottom: '28px', display: 'inline-block' }}>
-              🏆 Smart India Hackathon 2026 · HCL Track
+              🚀 Enterprise-Grade AI Learning Platform
             </span>
           </motion.div>
 
@@ -291,7 +291,7 @@ export default function Landing({ onGetStarted }) {
             <Brain size={15} color="white" />
           </div>
           <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem' }} className="gradient-text">Nexis</span>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>· Smart India Hackathon 2026</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>· AI-Powered Learning</span>
         </div>
         <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
           Built with PyTorch · BKT · LightGBM · Node2Vec · FastAPI · React · Firebase

@@ -1,6 +1,6 @@
 // Firebase initialization — uses env vars with fallback to project config
 import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithRedirect, signOut } from 'firebase/auth'
 import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -25,8 +25,7 @@ export { auth, db, googleProvider, isFirebaseConfigured }
 // ─── Auth helpers ───────────────────────────────────────────────────────────
 
 export const signInWithGoogle = async () => {
-  const result = await signInWithPopup(auth, googleProvider)
-  return result.user
+  await signInWithRedirect(auth, googleProvider)
 }
 
 export const signOutUser = async () => {
