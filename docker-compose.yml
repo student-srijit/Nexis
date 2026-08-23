@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data          # mount data so models persist
+      - backend-db:/app/nexis.db
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DATABASE_URL=sqlite+aiosqlite:///./nexis.db
+      - SKILL_GRAPH_PATH=data/processed/skill_graph.pkl
+      - BKT_MODEL_DIR=data/processed/bkt_models
+      - RECOMMENDER_DIR=data/processed/recommender
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-db:

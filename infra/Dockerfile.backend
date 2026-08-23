@@ -1,0 +1,37 @@
+# Backend Dockerfile — Python 3.11 slim + CPU-only PyTorch
+# Approx image size: ~1.8 GB (sentence-transformers is the largest dep)
+# Pre-trained models are baked in from the data/ volume mount — no training in Docker
+
+FROM python:3.11-slim
+
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Python deps (CPU-only torch to keep image lightweight)
+COPY backend/requirements.txt .
+
+# Install torch CPU first (avoids pulling GPU binaries)
+RUN pip install --no-cache-dir \
+    torch==2.3.0+cpu \
+    --extra-index-url https://download.pytorch.org/whl/cpu
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy backend code
+COPY backend/ .
+
+# Expose
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run with uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

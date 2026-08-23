@@ -1,0 +1,12 @@
+node_modules/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+data/raw/
+data/processed/
+learnpath.db
+nexis.db
+dist/
+build/
+.cache/
