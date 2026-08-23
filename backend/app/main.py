@@ -24,21 +24,28 @@ async def lifespan(app: FastAPI):
     print("[START] Nexis starting up...")
     await init_db()
 
+    # Calculate absolute path to learnpath-ai root
+    ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    DATA_DIR = os.path.join(ROOT_DIR, "data", "processed")
+
     # Load skill graph (fast — pre-built NetworkX pickle)
     app.state.skill_graph = SkillGraph()
-    app.state.skill_graph.load(os.getenv("SKILL_GRAPH_PATH", "data/processed/skill_graph.pkl"))
+    app.state.skill_graph.load(os.getenv("SKILL_GRAPH_PATH", os.path.join(DATA_DIR, "skill_graph.pkl")))
 
     # Load mastery model (pre-trained BKT per skill) — fast
     app.state.mastery_model = MasteryModel()
-    app.state.mastery_model.load(os.getenv("BKT_MODEL_DIR", "data/processed/bkt_models"))
+    app.state.mastery_model.load(os.getenv("BKT_MODEL_DIR", os.path.join(DATA_DIR, "bkt_models")))
 
     # Load recommender — in background so Render health checks pass immediately
     app.state.recommender = Recommender()
 
     async def _load_recommender():
-        recommender_dir = os.getenv("RECOMMENDER_DIR", "data/processed/recommender")
-        await asyncio.to_thread(app.state.recommender.load, recommender_dir)
-        print("[OK] Recommender loaded in background.")
+        recommender_dir = os.getenv("RECOMMENDER_DIR", os.path.join(DATA_DIR, "recommender"))
+        try:
+            await asyncio.to_thread(app.state.recommender.load, recommender_dir)
+            print("[OK] Recommender loaded in background.")
+        except Exception as e:
+            print(f"[ERROR] Failed to load recommender: {e}")
 
     asyncio.create_task(_load_recommender())
 
