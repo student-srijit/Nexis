@@ -72,8 +72,20 @@ async def generate_path(
         for sid in gap_skills_ordered
     ]
 
-    # Get recommendations
+    # Get recommendations — fail fast if recommender hasn't finished loading
+    if not recommender._course_ids:
+        raise HTTPException(
+            status_code=503,
+            detail="Recommender is still loading (cold start). Please retry in 10 seconds."
+        )
     recommendations = recommender.recommend(gap_skill_pairs, mastery, top_k=10)
+
+    # Guard: if somehow we still got no recommendations, reject rather than save empty path
+    if not recommendations:
+        raise HTTPException(
+            status_code=503,
+            detail="Course catalog is empty — recommender may still be warming up. Please retry."
+        )
 
     # Generate path
     path = _planner.generate_path(

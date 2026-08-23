@@ -82,9 +82,27 @@ export default function Dashboard() {
     setLoading(true)
     try {
       toast.loading('Generating your personalized path…', { id: 'gen' })
-      const pathRes = await generatePath(learnerId)
+      let pathRes = null
+      let lastErr = null
+      for (let attempt = 1; attempt <= 5; attempt++) {
+        try {
+          pathRes = await generatePath(learnerId)
+          break
+        } catch (err) {
+          lastErr = err
+          const is503 = err.response?.status === 503
+          if (is503 && attempt < 5) {
+            toast.loading(`ML models warming up… retrying (${attempt}/5)`, { id: 'gen' })
+            await new Promise(r => setTimeout(r, 5000))
+          } else {
+            break
+          }
+        }
+      }
+      if (!pathRes) throw lastErr
       setPath(pathRes.data)
       setCurrentPath(pathRes.data)
+      try { await saveUserPath(learnerId, pathRes.data) } catch (_) {}
       toast.success('🎉 Path generated!', { id: 'gen' })
     } catch (err) {
       toast.error('Could not generate path: ' + (err.response?.data?.detail || err.message), { id: 'gen' })

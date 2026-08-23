@@ -57,21 +57,26 @@ export default function Onboarding() {
       const quizRes = await submitQuiz(learnerId, responses)
       setMastery(quizRes.data.skill_updates || {})
 
-      // Generate path — retry up to 3x with 3s gaps in case the recommender
-      // is still loading on a cold Render instance
+      // Generate path — retry up to 5x with 5s gaps for cold-start 503s
       let pathRes = null
       let lastErr = null
-      for (let attempt = 1; attempt <= 3; attempt++) {
+      for (let attempt = 1; attempt <= 5; attempt++) {
         try {
           pathRes = await generatePath(learnerId)
           break
         } catch (err) {
           lastErr = err
-          if (attempt < 3) {
-            await new Promise(r => setTimeout(r, 3000))
+          const is503 = err.response?.status === 503
+          if (is503 && attempt < 5) {
+            toast.loading(`ML models warming up… retrying (${attempt}/5)`, { id: 'retry' })
+            await new Promise(r => setTimeout(r, 5000))
+          } else {
+            toast.dismiss('retry')
+            break
           }
         }
       }
+      toast.dismiss('retry')
 
       if (!pathRes) throw lastErr
 
