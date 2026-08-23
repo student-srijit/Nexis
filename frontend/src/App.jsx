@@ -51,9 +51,14 @@ function AppInner() {
         if (savedPath?.steps?.length > 0) {
           setCurrentPath(savedPath)
           setPhase('dashboard')
+        } else if (phase === 'landing' || phase === 'login') {
+          setPhase('onboarding')
         }
       } catch (_) {
         // Firestore unavailable — continue with local state
+        if (phase === 'landing' || phase === 'login') {
+          setPhase('onboarding')
+        }
       }
     }
     restore()
