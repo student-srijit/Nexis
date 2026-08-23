@@ -101,7 +101,7 @@ class ProfilingEngine:
     def __init__(self, skill_graph=None):
         self._client = None
         self._api_key = os.getenv("OPENROUTER_API_KEY", "")
-        self._model_name = os.getenv("OPENROUTER_MODEL", "google/gemini-2.0-flash-001")
+        self._model_name = os.getenv("OPENROUTER_MODEL", "openrouter/free")
         self._initialized = False
         self.skill_graph = skill_graph  # injected at runtime
 
