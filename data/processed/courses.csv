@@ -1,0 +1,35 @@
+course_id,title,provider,difficulty,estimated_hours,description,url
+c_py_001,Python for Everybody Specialization,Coursera,beginner,30,"Learn Python programming from scratch. Covers data structures, web scraping, databases, and more.",https://www.coursera.org/specializations/python
+c_py_002,Python 3 Programming Specialization,Coursera,beginner,25,"Master Python 3 through projects: data analysis, APIs, and object-oriented programming.",https://www.coursera.org/specializations/python-3-programming
+c_py_003,Python Bootcamp: Zero to Hero,Udemy,beginner,22,Complete Python bootcamp — go from zero to hero in Python.,https://www.udemy.com/course/complete-python-bootcamp/
+c_py_004,Automate the Boring Stuff with Python,Udemy,beginner,9,Practical programming for total beginners. Automate repetitive tasks with Python.,https://www.udemy.com/course/automate/
+c_st_001,Statistics with Python Specialization,Coursera,intermediate,40,"Statistical analysis in Python: hypothesis testing, regression, and Bayesian methods.",https://www.coursera.org/specializations/statistics-with-python
+c_st_002,Introduction to Statistics,Stanford (Coursera),beginner,15,"Stanford's intro to statistics — descriptive statistics, probability, inference.",https://www.coursera.org/learn/stanford-statistics
+c_st_003,Probability and Statistics,Khan Academy,beginner,20,"Free stats course covering probability, distributions, and statistical inference.",https://www.khanacademy.org/math/statistics-probability
+c_ml_001,Machine Learning Specialization,Coursera (DeepLearning.AI),intermediate,65,"Andrew Ng's ML Specialization: supervised learning, neural networks, recommender systems.",https://www.coursera.org/specializations/machine-learning-introduction
+c_ml_002,Applied Machine Learning in Python,Coursera (Michigan),intermediate,30,"Applied ML using scikit-learn: classification, regression, clustering, evaluation.",https://www.coursera.org/learn/python-machine-learning
+c_ml_003,Machine Learning with Python,IBM (Coursera),beginner,20,"IBM's hands-on ML course: regression, classification, clustering, recommender systems.",https://www.coursera.org/learn/machine-learning-with-python
+c_ml_004,Hands-On Machine Learning with Scikit-Learn,Udemy,intermediate,35,"Practical ML: decision trees, random forests, SVMs, ensemble methods.",https://www.udemy.com/course/machine-learning-and-deep-learning-in-python-and-r/
+c_dl_001,Deep Learning Specialization,Coursera (DeepLearning.AI),advanced,80,"Andrew Ng's Deep Learning Specialization: CNNs, RNNs, transformers, MLOps.",https://www.coursera.org/specializations/deep-learning
+c_dl_002,PyTorch for Deep Learning Bootcamp,Udemy,intermediate,40,"Complete PyTorch bootcamp: tensor operations, CNNs, RNNs, transfer learning.",https://www.udemy.com/course/pytorch-for-deep-learning/
+c_dl_003,TensorFlow Developer Certificate,Coursera (DeepLearning.AI),intermediate,60,"Prepare for TensorFlow developer certification: image classification, NLP, time series.",https://www.coursera.org/professional-certificates/tensorflow-in-practice
+c_sql_001,SQL for Data Science,Coursera (UC Davis),beginner,15,"SQL fundamentals for data scientists: SELECT, JOIN, GROUP BY, subqueries.",https://www.coursera.org/learn/sql-for-data-science
+c_sql_002,The Complete SQL Bootcamp,Udemy,beginner,9,Learn SQL from scratch using PostgreSQL. Covers basics to advanced queries.,https://www.udemy.com/course/the-complete-sql-bootcamp/
+c_sql_003,Advanced SQL for Data Scientists,Coursera,intermediate,12,"Window functions, CTEs, query optimization for data science workloads.",https://www.coursera.org/learn/advanced-sql
+c_viz_001,Data Visualization with Python,IBM (Coursera),intermediate,18,"Matplotlib, Seaborn, Plotly, Folium: build stunning visualizations.",https://www.coursera.org/learn/python-for-data-visualization
+c_viz_002,Tableau for Data Scientists,Coursera,intermediate,22,Interactive dashboards with Tableau. Storytelling with data.,https://www.coursera.org/learn/analytics-tableau
+c_pd_001,Data Analysis with Python,Coursera (IBM),intermediate,20,"NumPy, Pandas, SciPy for data analysis. EDA and feature engineering.",https://www.coursera.org/learn/data-analysis-with-python
+c_pd_002,Python Pandas Tutorial,Kaggle,beginner,4,"Free Kaggle Learn course: DataFrames, indexing, groupby, merging.",https://www.kaggle.com/learn/pandas
+c_nlp_001,Natural Language Processing Specialization,Coursera (DeepLearning.AI),advanced,90,"NLP with attention models: sentiment, NER, machine translation, transformers.",https://www.coursera.org/specializations/natural-language-processing
+c_nlp_002,Hugging Face NLP Course,Hugging Face,intermediate,30,"Transformers, tokenizers, fine-tuning with Hugging Face ecosystem. Free.",https://huggingface.co/learn/nlp-course
+c_cv_001,Convolutional Neural Networks,Coursera (DeepLearning.AI),advanced,35,"CNN architectures: ResNet, YOLO, face recognition, neural style transfer.",https://www.coursera.org/learn/convolutional-neural-networks
+c_cv_002,Computer Vision with OpenCV,Udemy,intermediate,20,"OpenCV for image processing, object detection, and video analysis.",https://www.udemy.com/course/python-for-computer-vision-with-opencv-and-deep-learning/
+c_mlops_001,Machine Learning Engineering for Production (MLOps),Coursera (DeepLearning.AI),advanced,70,"Deploy ML models at scale: data pipelines, model serving, monitoring, CI/CD.",https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops
+c_mlops_002,Full Stack Deep Learning,UC Berkeley (Free),advanced,40,"Production ML systems: experiment tracking, deployment, monitoring. Free course.",https://fullstackdeeplearning.com/
+c_docker_001,Docker and Kubernetes for Developers,Udemy,intermediate,22,"Containerize apps with Docker, orchestrate with Kubernetes.",https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/
+c_cloud_001,Google Cloud Professional Data Engineer,Coursera (Google),advanced,50,"GCP data engineering: BigQuery, Dataflow, Vertex AI, Pub/Sub.",https://www.coursera.org/professional-certificates/gcp-data-engineering
+c_fe_001,Feature Engineering,Kaggle,intermediate,5,"Free Kaggle course: mutual information, target encoding, PCA, clustering.",https://www.kaggle.com/learn/feature-engineering
+c_ds_001,IBM Data Science Professional Certificate,Coursera (IBM),beginner,100,"Complete data science path: Python, SQL, visualization, ML, capstone project.",https://www.coursera.org/professional-certificates/ibm-data-science
+c_ds_002,Google Data Analytics Certificate,Coursera (Google),beginner,80,"Google's data analytics path: spreadsheets, SQL, Tableau, R for analysis.",https://www.coursera.org/professional-certificates/google-data-analytics
+c_git_001,Version Control with Git,Atlassian (Coursera),beginner,8,"Git fundamentals: branching, merging, pull requests, workflow strategies.",https://www.coursera.org/learn/version-control-with-git
+c_r_001,R Programming,Coursera (Johns Hopkins),beginner,20,"R programming for data science: vectors, functions, data frames, plotting.",https://www.coursera.org/learn/r-programming

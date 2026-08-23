@@ -1,0 +1,446 @@
+{
+  "c_py_001": {
+    "course_id": "c_py_001",
+    "title": "Python for Everybody Specialization",
+    "provider": "Coursera",
+    "difficulty": "beginner",
+    "estimated_hours": 30,
+    "skills": [
+      "s_python"
+    ],
+    "description": "Learn Python programming from scratch. Covers data structures, web scraping, databases, and more.",
+    "url": "https://www.coursera.org/specializations/python"
+  },
+  "c_py_002": {
+    "course_id": "c_py_002",
+    "title": "Python 3 Programming Specialization",
+    "provider": "Coursera",
+    "difficulty": "beginner",
+    "estimated_hours": 25,
+    "skills": [
+      "s_python"
+    ],
+    "description": "Master Python 3 through projects: data analysis, APIs, and object-oriented programming.",
+    "url": "https://www.coursera.org/specializations/python-3-programming"
+  },
+  "c_py_003": {
+    "course_id": "c_py_003",
+    "title": "Python Bootcamp: Zero to Hero",
+    "provider": "Udemy",
+    "difficulty": "beginner",
+    "estimated_hours": 22,
+    "skills": [
+      "s_python"
+    ],
+    "description": "Complete Python bootcamp \u2014 go from zero to hero in Python.",
+    "url": "https://www.udemy.com/course/complete-python-bootcamp/"
+  },
+  "c_py_004": {
+    "course_id": "c_py_004",
+    "title": "Automate the Boring Stuff with Python",
+    "provider": "Udemy",
+    "difficulty": "beginner",
+    "estimated_hours": 9,
+    "skills": [
+      "s_python"
+    ],
+    "description": "Practical programming for total beginners. Automate repetitive tasks with Python.",
+    "url": "https://www.udemy.com/course/automate/"
+  },
+  "c_st_001": {
+    "course_id": "c_st_001",
+    "title": "Statistics with Python Specialization",
+    "provider": "Coursera",
+    "difficulty": "intermediate",
+    "estimated_hours": 40,
+    "skills": [
+      "s_stats",
+      "s_python"
+    ],
+    "description": "Statistical analysis in Python: hypothesis testing, regression, and Bayesian methods.",
+    "url": "https://www.coursera.org/specializations/statistics-with-python"
+  },
+  "c_st_002": {
+    "course_id": "c_st_002",
+    "title": "Introduction to Statistics",
+    "provider": "Stanford (Coursera)",
+    "difficulty": "beginner",
+    "estimated_hours": 15,
+    "skills": [
+      "s_stats"
+    ],
+    "description": "Stanford's intro to statistics \u2014 descriptive statistics, probability, inference.",
+    "url": "https://www.coursera.org/learn/stanford-statistics"
+  },
+  "c_st_003": {
+    "course_id": "c_st_003",
+    "title": "Probability and Statistics",
+    "provider": "Khan Academy",
+    "difficulty": "beginner",
+    "estimated_hours": 20,
+    "skills": [
+      "s_stats"
+    ],
+    "description": "Free stats course covering probability, distributions, and statistical inference.",
+    "url": "https://www.khanacademy.org/math/statistics-probability"
+  },
+  "c_ml_001": {
+    "course_id": "c_ml_001",
+    "title": "Machine Learning Specialization",
+    "provider": "Coursera (DeepLearning.AI)",
+    "difficulty": "intermediate",
+    "estimated_hours": 65,
+    "skills": [
+      "s_ml",
+      "s_python"
+    ],
+    "description": "Andrew Ng's ML Specialization: supervised learning, neural networks, recommender systems.",
+    "url": "https://www.coursera.org/specializations/machine-learning-introduction"
+  },
+  "c_ml_002": {
+    "course_id": "c_ml_002",
+    "title": "Applied Machine Learning in Python",
+    "provider": "Coursera (Michigan)",
+    "difficulty": "intermediate",
+    "estimated_hours": 30,
+    "skills": [
+      "s_ml",
+      "s_python",
+      "s_pandas"
+    ],
+    "description": "Applied ML using scikit-learn: classification, regression, clustering, evaluation.",
+    "url": "https://www.coursera.org/learn/python-machine-learning"
+  },
+  "c_ml_003": {
+    "course_id": "c_ml_003",
+    "title": "Machine Learning with Python",
+    "provider": "IBM (Coursera)",
+    "difficulty": "beginner",
+    "estimated_hours": 20,
+    "skills": [
+      "s_ml",
+      "s_python"
+    ],
+    "description": "IBM's hands-on ML course: regression, classification, clustering, recommender systems.",
+    "url": "https://www.coursera.org/learn/machine-learning-with-python"
+  },
+  "c_ml_004": {
+    "course_id": "c_ml_004",
+    "title": "Hands-On Machine Learning with Scikit-Learn",
+    "provider": "Udemy",
+    "difficulty": "intermediate",
+    "estimated_hours": 35,
+    "skills": [
+      "s_ml",
+      "s_python",
+      "s_feature_eng"
+    ],
+    "description": "Practical ML: decision trees, random forests, SVMs, ensemble methods.",
+    "url": "https://www.udemy.com/course/machine-learning-and-deep-learning-in-python-and-r/"
+  },
+  "c_dl_001": {
+    "course_id": "c_dl_001",
+    "title": "Deep Learning Specialization",
+    "provider": "Coursera (DeepLearning.AI)",
+    "difficulty": "advanced",
+    "estimated_hours": 80,
+    "skills": [
+      "s_dl",
+      "s_ml",
+      "s_python"
+    ],
+    "description": "Andrew Ng's Deep Learning Specialization: CNNs, RNNs, transformers, MLOps.",
+    "url": "https://www.coursera.org/specializations/deep-learning"
+  },
+  "c_dl_002": {
+    "course_id": "c_dl_002",
+    "title": "PyTorch for Deep Learning Bootcamp",
+    "provider": "Udemy",
+    "difficulty": "intermediate",
+    "estimated_hours": 40,
+    "skills": [
+      "s_dl",
+      "s_python"
+    ],
+    "description": "Complete PyTorch bootcamp: tensor operations, CNNs, RNNs, transfer learning.",
+    "url": "https://www.udemy.com/course/pytorch-for-deep-learning/"
+  },
+  "c_dl_003": {
+    "course_id": "c_dl_003",
+    "title": "TensorFlow Developer Certificate",
+    "provider": "Coursera (DeepLearning.AI)",
+    "difficulty": "intermediate",
+    "estimated_hours": 60,
+    "skills": [
+      "s_dl",
+      "s_python"
+    ],
+    "description": "Prepare for TensorFlow developer certification: image classification, NLP, time series.",
+    "url": "https://www.coursera.org/professional-certificates/tensorflow-in-practice"
+  },
+  "c_sql_001": {
+    "course_id": "c_sql_001",
+    "title": "SQL for Data Science",
+    "provider": "Coursera (UC Davis)",
+    "difficulty": "beginner",
+    "estimated_hours": 15,
+    "skills": [
+      "s_sql"
+    ],
+    "description": "SQL fundamentals for data scientists: SELECT, JOIN, GROUP BY, subqueries.",
+    "url": "https://www.coursera.org/learn/sql-for-data-science"
+  },
+  "c_sql_002": {
+    "course_id": "c_sql_002",
+    "title": "The Complete SQL Bootcamp",
+    "provider": "Udemy",
+    "difficulty": "beginner",
+    "estimated_hours": 9,
+    "skills": [
+      "s_sql"
+    ],
+    "description": "Learn SQL from scratch using PostgreSQL. Covers basics to advanced queries.",
+    "url": "https://www.udemy.com/course/the-complete-sql-bootcamp/"
+  },
+  "c_sql_003": {
+    "course_id": "c_sql_003",
+    "title": "Advanced SQL for Data Scientists",
+    "provider": "Coursera",
+    "difficulty": "intermediate",
+    "estimated_hours": 12,
+    "skills": [
+      "s_sql"
+    ],
+    "description": "Window functions, CTEs, query optimization for data science workloads.",
+    "url": "https://www.coursera.org/learn/advanced-sql"
+  },
+  "c_viz_001": {
+    "course_id": "c_viz_001",
+    "title": "Data Visualization with Python",
+    "provider": "IBM (Coursera)",
+    "difficulty": "intermediate",
+    "estimated_hours": 18,
+    "skills": [
+      "s_data_viz",
+      "s_python",
+      "s_pandas"
+    ],
+    "description": "Matplotlib, Seaborn, Plotly, Folium: build stunning visualizations.",
+    "url": "https://www.coursera.org/learn/python-for-data-visualization"
+  },
+  "c_viz_002": {
+    "course_id": "c_viz_002",
+    "title": "Tableau for Data Scientists",
+    "provider": "Coursera",
+    "difficulty": "intermediate",
+    "estimated_hours": 22,
+    "skills": [
+      "s_data_viz"
+    ],
+    "description": "Interactive dashboards with Tableau. Storytelling with data.",
+    "url": "https://www.coursera.org/learn/analytics-tableau"
+  },
+  "c_pd_001": {
+    "course_id": "c_pd_001",
+    "title": "Data Analysis with Python",
+    "provider": "Coursera (IBM)",
+    "difficulty": "intermediate",
+    "estimated_hours": 20,
+    "skills": [
+      "s_pandas",
+      "s_python",
+      "s_data_viz"
+    ],
+    "description": "NumPy, Pandas, SciPy for data analysis. EDA and feature engineering.",
+    "url": "https://www.coursera.org/learn/data-analysis-with-python"
+  },
+  "c_pd_002": {
+    "course_id": "c_pd_002",
+    "title": "Python Pandas Tutorial",
+    "provider": "Kaggle",
+    "difficulty": "beginner",
+    "estimated_hours": 4,
+    "skills": [
+      "s_pandas",
+      "s_python"
+    ],
+    "description": "Free Kaggle Learn course: DataFrames, indexing, groupby, merging.",
+    "url": "https://www.kaggle.com/learn/pandas"
+  },
+  "c_nlp_001": {
+    "course_id": "c_nlp_001",
+    "title": "Natural Language Processing Specialization",
+    "provider": "Coursera (DeepLearning.AI)",
+    "difficulty": "advanced",
+    "estimated_hours": 90,
+    "skills": [
+      "s_nlp",
+      "s_dl",
+      "s_python"
+    ],
+    "description": "NLP with attention models: sentiment, NER, machine translation, transformers.",
+    "url": "https://www.coursera.org/specializations/natural-language-processing"
+  },
+  "c_nlp_002": {
+    "course_id": "c_nlp_002",
+    "title": "Hugging Face NLP Course",
+    "provider": "Hugging Face",
+    "difficulty": "intermediate",
+    "estimated_hours": 30,
+    "skills": [
+      "s_nlp",
+      "s_dl"
+    ],
+    "description": "Transformers, tokenizers, fine-tuning with Hugging Face ecosystem. Free.",
+    "url": "https://huggingface.co/learn/nlp-course"
+  },
+  "c_cv_001": {
+    "course_id": "c_cv_001",
+    "title": "Convolutional Neural Networks",
+    "provider": "Coursera (DeepLearning.AI)",
+    "difficulty": "advanced",
+    "estimated_hours": 35,
+    "skills": [
+      "s_cv",
+      "s_dl",
+      "s_python"
+    ],
+    "description": "CNN architectures: ResNet, YOLO, face recognition, neural style transfer.",
+    "url": "https://www.coursera.org/learn/convolutional-neural-networks"
+  },
+  "c_cv_002": {
+    "course_id": "c_cv_002",
+    "title": "Computer Vision with OpenCV",
+    "provider": "Udemy",
+    "difficulty": "intermediate",
+    "estimated_hours": 20,
+    "skills": [
+      "s_cv",
+      "s_python"
+    ],
+    "description": "OpenCV for image processing, object detection, and video analysis.",
+    "url": "https://www.udemy.com/course/python-for-computer-vision-with-opencv-and-deep-learning/"
+  },
+  "c_mlops_001": {
+    "course_id": "c_mlops_001",
+    "title": "Machine Learning Engineering for Production (MLOps)",
+    "provider": "Coursera (DeepLearning.AI)",
+    "difficulty": "advanced",
+    "estimated_hours": 70,
+    "skills": [
+      "s_mlops",
+      "s_ml",
+      "s_docker"
+    ],
+    "description": "Deploy ML models at scale: data pipelines, model serving, monitoring, CI/CD.",
+    "url": "https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops"
+  },
+  "c_mlops_002": {
+    "course_id": "c_mlops_002",
+    "title": "Full Stack Deep Learning",
+    "provider": "UC Berkeley (Free)",
+    "difficulty": "advanced",
+    "estimated_hours": 40,
+    "skills": [
+      "s_mlops",
+      "s_dl",
+      "s_docker"
+    ],
+    "description": "Production ML systems: experiment tracking, deployment, monitoring. Free course.",
+    "url": "https://fullstackdeeplearning.com/"
+  },
+  "c_docker_001": {
+    "course_id": "c_docker_001",
+    "title": "Docker and Kubernetes for Developers",
+    "provider": "Udemy",
+    "difficulty": "intermediate",
+    "estimated_hours": 22,
+    "skills": [
+      "s_docker"
+    ],
+    "description": "Containerize apps with Docker, orchestrate with Kubernetes.",
+    "url": "https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/"
+  },
+  "c_cloud_001": {
+    "course_id": "c_cloud_001",
+    "title": "Google Cloud Professional Data Engineer",
+    "provider": "Coursera (Google)",
+    "difficulty": "advanced",
+    "estimated_hours": 50,
+    "skills": [
+      "s_cloud",
+      "s_mlops"
+    ],
+    "description": "GCP data engineering: BigQuery, Dataflow, Vertex AI, Pub/Sub.",
+    "url": "https://www.coursera.org/professional-certificates/gcp-data-engineering"
+  },
+  "c_fe_001": {
+    "course_id": "c_fe_001",
+    "title": "Feature Engineering",
+    "provider": "Kaggle",
+    "difficulty": "intermediate",
+    "estimated_hours": 5,
+    "skills": [
+      "s_feature_eng",
+      "s_pandas",
+      "s_python"
+    ],
+    "description": "Free Kaggle course: mutual information, target encoding, PCA, clustering.",
+    "url": "https://www.kaggle.com/learn/feature-engineering"
+  },
+  "c_ds_001": {
+    "course_id": "c_ds_001",
+    "title": "IBM Data Science Professional Certificate",
+    "provider": "Coursera (IBM)",
+    "difficulty": "beginner",
+    "estimated_hours": 100,
+    "skills": [
+      "s_python",
+      "s_sql",
+      "s_ml",
+      "s_data_viz",
+      "s_pandas"
+    ],
+    "description": "Complete data science path: Python, SQL, visualization, ML, capstone project.",
+    "url": "https://www.coursera.org/professional-certificates/ibm-data-science"
+  },
+  "c_ds_002": {
+    "course_id": "c_ds_002",
+    "title": "Google Data Analytics Certificate",
+    "provider": "Coursera (Google)",
+    "difficulty": "beginner",
+    "estimated_hours": 80,
+    "skills": [
+      "s_sql",
+      "s_data_viz",
+      "s_stats"
+    ],
+    "description": "Google's data analytics path: spreadsheets, SQL, Tableau, R for analysis.",
+    "url": "https://www.coursera.org/professional-certificates/google-data-analytics"
+  },
+  "c_git_001": {
+    "course_id": "c_git_001",
+    "title": "Version Control with Git",
+    "provider": "Atlassian (Coursera)",
+    "difficulty": "beginner",
+    "estimated_hours": 8,
+    "skills": [
+      "s_git"
+    ],
+    "description": "Git fundamentals: branching, merging, pull requests, workflow strategies.",
+    "url": "https://www.coursera.org/learn/version-control-with-git"
+  },
+  "c_r_001": {
+    "course_id": "c_r_001",
+    "title": "R Programming",
+    "provider": "Coursera (Johns Hopkins)",
+    "difficulty": "beginner",
+    "estimated_hours": 20,
+    "skills": [
+      "s_r",
+      "s_stats"
+    ],
+    "description": "R programming for data science: vectors, functions, data frames, plotting.",
+    "url": "https://www.coursera.org/learn/r-programming"
+  }
+}

@@ -1,0 +1,15 @@
+broader_skill,narrower_skill
+s_python,s_pandas
+s_stats,s_ml
+s_python,s_ml
+s_ml,s_dl
+s_pandas,s_data_viz
+s_ml,s_nlp
+s_dl,s_nlp
+s_dl,s_cv
+s_python,s_feature_eng
+s_ml,s_feature_eng
+s_python,s_mlops
+s_ml,s_mlops
+s_docker,s_mlops
+s_python,s_git

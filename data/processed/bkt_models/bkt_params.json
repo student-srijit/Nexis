@@ -1,0 +1,107 @@
+{
+  "s_git": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.0983,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_pandas": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1135,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_feature_eng": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1206,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_stats": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.114,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_r": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1171,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_python": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1156,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_sql": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1109,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_dl": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1355,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_data_viz": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1071,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_ml": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.124,
+    "guess": 0.4,
+    "prior": 0.2
+  },
+  "s_nlp": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1,
+    "guess": 0.2,
+    "prior": 0.2
+  },
+  "s_cv": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1,
+    "guess": 0.2,
+    "prior": 0.2
+  },
+  "s_mlops": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1,
+    "guess": 0.2,
+    "prior": 0.2
+  },
+  "s_docker": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1,
+    "guess": 0.2,
+    "prior": 0.2
+  },
+  "s_cloud": {
+    "learn": 0.25,
+    "forget": 0.0,
+    "slip": 0.1,
+    "guess": 0.2,
+    "prior": 0.2
+  }
+}

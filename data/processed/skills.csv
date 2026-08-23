@@ -1,0 +1,16 @@
+skill_id,preferred_label
+s_python,Python (computer programming)
+s_ml,Machine Learning
+s_stats,Statistics
+s_dl,Deep Learning
+s_data_viz,Data Visualisation
+s_sql,SQL (query language)
+s_pandas,Data manipulation with pandas
+s_git,Version control with Git
+s_docker,Containerisation with Docker
+s_nlp,Natural Language Processing
+s_cv,Computer Vision
+s_cloud,Cloud Computing
+s_mlops,MLOps and model deployment
+s_feature_eng,Feature Engineering
+s_r,R (programming language)
