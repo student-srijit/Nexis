@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth, isFirebaseConfigured } from './firebase'
-import { onAuthStateChanged, getRedirectResult } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 
 const AuthContext = createContext(null)
 
@@ -15,10 +15,6 @@ export function AuthProvider({ children }) {
       return
     }
 
-    // Process redirect result if returning from Google sign-in
-    getRedirectResult(auth).catch(err => {
-      console.error('Redirect sign-in error:', err)
-    })
 
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser)
