@@ -34,43 +34,50 @@ export const signOutUser = async () => {
 
 // ─── Firestore helpers ───────────────────────────────────────────────────────
 
+const withTimeout = (promise, ms = 2500) => {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore timeout')), ms))
+  ])
+}
+
 export const saveUserProfile = async (uid, profileData) => {
   try {
-    await setDoc(doc(db, 'users', uid, 'data', 'profile'), {
+    setDoc(doc(db, 'users', uid, 'data', 'profile'), {
       ...profileData,
       updatedAt: serverTimestamp(),
-    }, { merge: true })
-  } catch (e) { console.warn('Firestore saveUserProfile:', e) }
+    }, { merge: true }).catch(e => console.warn('Firestore async save:', e))
+  } catch (e) { console.warn('Firestore saveUserProfile error:', e) }
 }
 
 export const getUserProfile = async (uid) => {
   try {
-    const snap = await getDoc(doc(db, 'users', uid, 'data', 'profile'))
+    const snap = await withTimeout(getDoc(doc(db, 'users', uid, 'data', 'profile')))
     return snap.exists() ? snap.data() : null
   } catch (e) { return null }
 }
 
 export const saveUserPath = async (uid, pathData) => {
   try {
-    await setDoc(doc(db, 'users', uid, 'data', 'currentPath'), {
+    setDoc(doc(db, 'users', uid, 'data', 'currentPath'), {
       ...pathData,
       savedAt: serverTimestamp(),
-    }, { merge: true })
-  } catch (e) { console.warn('Firestore saveUserPath:', e) }
+    }, { merge: true }).catch(e => console.warn('Firestore async save:', e))
+  } catch (e) { console.warn('Firestore saveUserPath error:', e) }
 }
 
 export const getUserPath = async (uid) => {
   try {
-    const snap = await getDoc(doc(db, 'users', uid, 'data', 'currentPath'))
+    const snap = await withTimeout(getDoc(doc(db, 'users', uid, 'data', 'currentPath')))
     return snap.exists() ? snap.data() : null
   } catch (e) { return null }
 }
 
 export const saveUserMastery = async (uid, mastery) => {
   try {
-    await setDoc(doc(db, 'users', uid, 'data', 'mastery'), {
+    setDoc(doc(db, 'users', uid, 'data', 'mastery'), {
       skills: mastery,
       updatedAt: serverTimestamp(),
-    }, { merge: true })
-  } catch (e) { console.warn('Firestore saveUserMastery:', e) }
+    }, { merge: true }).catch(e => console.warn('Firestore async save:', e))
+  } catch (e) { console.warn('Firestore saveUserMastery error:', e) }
 }
