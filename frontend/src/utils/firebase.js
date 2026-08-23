@@ -1,7 +1,7 @@
 // Firebase initialization — uses env vars with fallback to project config
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp, deleteDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDo__uJVdaE_0uptk1aNeAIF_QLAbeIG6o",
@@ -71,4 +71,12 @@ export const saveUserMastery = async (uid, mastery) => {
     skills: mastery,
     updatedAt: serverTimestamp(),
   }, { merge: true })
+}
+
+export const resetUserData = async (uid) => {
+  await Promise.all([
+    deleteDoc(doc(db, 'users', uid, 'data', 'profile')),
+    deleteDoc(doc(db, 'users', uid, 'data', 'currentPath')),
+    deleteDoc(doc(db, 'users', uid, 'data', 'mastery'))
+  ])
 }

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Brain, Target, BarChart2, MessageSquare, RefreshCw,
   CheckCircle2, ChevronRight, Trophy, Loader2, BookOpen,
-  Zap, TrendingUp, RotateCcw
+  Zap, TrendingUp, RotateCcw, User
 } from 'lucide-react'
 import { useStore } from '../utils/store'
 import { getCurrentPath, getMastery, submitQuiz, replanPath, generatePath } from '../utils/api'
@@ -13,6 +13,7 @@ import MasteryRadar from '../components/MasteryRadar'
 import PathTimeline from '../components/PathTimeline'
 import CourseCard from '../components/CourseCard'
 import ChatPanel from '../components/ChatPanel'
+import ProfilePanel from '../components/ProfilePanel'
 import toast from 'react-hot-toast'
 
 const TABS = [
@@ -20,6 +21,7 @@ const TABS = [
   { id: 'mastery', label: 'Mastery', icon: Brain },
   { id: 'chat', label: 'AI Assistant', icon: MessageSquare },
   { id: 'quiz', label: 'Quiz & Replan', icon: Zap },
+  { id: 'profile', label: 'Profile', icon: User },
 ]
 
 // Mini quiz for adaptive replanning
@@ -472,6 +474,12 @@ export default function Dashboard() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {activeTab === 'profile' && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ padding: '24px 0' }}>
+            <ProfilePanel />
+          </motion.div>
+        )}
       </div>
     </div>
   )
