@@ -48,15 +48,18 @@ function AppInner() {
           getUserProfile(user.uid),
         ])
         if (savedProfile) setProfile(savedProfile)
+        const currentPhase = useStore.getState().phase
+        
         if (savedPath?.steps?.length > 0) {
           setCurrentPath(savedPath)
           setPhase('dashboard')
-        } else if (phase === 'landing' || phase === 'login') {
+        } else if (currentPhase === 'landing' || currentPhase === 'login') {
           setPhase('onboarding')
         }
       } catch (_) {
         // Firestore unavailable — continue with local state
-        if (phase === 'landing' || phase === 'login') {
+        const currentPhase = useStore.getState().phase
+        if (currentPhase === 'landing' || currentPhase === 'login') {
           setPhase('onboarding')
         }
       }
