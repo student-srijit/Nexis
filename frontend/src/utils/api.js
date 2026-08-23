@@ -1,12 +1,26 @@
-// API client
+// API client — reads backend URL from env, attaches Firebase auth token
 import axios from 'axios'
+import { auth, isFirebaseConfigured } from './firebase'
 
-const rawUrl = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
-const baseURL = rawUrl ? (rawUrl.endsWith('/api') ? rawUrl : `${rawUrl}/api`) : '/api';
+const rawUrl = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
+const baseURL = rawUrl ? (rawUrl.endsWith('/api') ? rawUrl : `${rawUrl}/api`) : '/api'
 
 const api = axios.create({
-  baseURL: baseURL,
+  baseURL,
   headers: { 'Content-Type': 'application/json' },
+})
+
+// Attach Firebase ID token to every request if user is signed in
+api.interceptors.request.use(async (config) => {
+  if (isFirebaseConfigured && auth?.currentUser) {
+    try {
+      const token = await auth.currentUser.getIdToken()
+      config.headers['Authorization'] = `Bearer ${token}`
+    } catch (_) {
+      // token fetch failed — continue without auth header
+    }
+  }
+  return config
 })
 
 export const createProfile = (learnerId, goalText) =>

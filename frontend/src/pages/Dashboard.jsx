@@ -7,6 +7,8 @@ import {
 } from 'lucide-react'
 import { useStore } from '../utils/store'
 import { getCurrentPath, getMastery, submitQuiz, replanPath, generatePath } from '../utils/api'
+import { signOutUser, saveUserPath } from '../utils/firebase'
+import { useAuth } from '../utils/AuthContext'
 import MasteryRadar from '../components/MasteryRadar'
 import PathTimeline from '../components/PathTimeline'
 import CourseCard from '../components/CourseCard'
@@ -39,7 +41,8 @@ export default function Dashboard() {
   const [currentStep, setCurrentStep] = useState(0)
   const [activeCourseId, setActiveCourseId] = useState(null)
 
-  const { learnerId, profile, currentPath, mastery: storedMastery, setCurrentPath, updateMastery, resetAll } = useStore()
+  const { learnerId, profile, currentPath, mastery: storedMastery, setCurrentPath, updateMastery, resetAll, setPhase: setStorePhase } = useStore()
+  const { user } = useAuth() || {}
 
   useEffect(() => {
     loadDashboard()
@@ -110,6 +113,8 @@ export default function Dashboard() {
       const replanRes = await replanPath(learnerId, [])
       setPath(replanRes.data)
       setCurrentPath(replanRes.data)
+      // Sync replanned path to Firestore
+      try { await saveUserPath(learnerId, replanRes.data) } catch (_) {}
       toast.success(`🔄 Path updated! Version ${replanRes.data.version}`)
       setActiveTab('path')
       setCurrentStep(0)
@@ -165,11 +170,22 @@ export default function Dashboard() {
           )}
 
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            {user && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '4px' }}>
+                {user.photoURL && <img src={user.photoURL} alt={user.displayName} style={{ width: 28, height: 28, borderRadius: '50%', border: '2px solid var(--border-accent)' }} />}
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', maxWidth: '120px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.displayName || user.email}</span>
+              </div>
+            )}
             <button onClick={loadDashboard} className="btn-ghost" style={{ padding: '6px 10px' }}>
               <RefreshCw size={14} />
             </button>
-            <button onClick={resetAll} className="btn-ghost" style={{ padding: '6px 10px', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-              <RotateCcw size={14} /> Reset
+            <button
+              onClick={async () => { await signOutUser(); resetAll(); setStorePhase('landing') }}
+              className="btn-ghost"
+              style={{ padding: '6px 10px', color: 'var(--text-muted)', fontSize: '0.8rem' }}
+              title="Sign out"
+            >
+              <RotateCcw size={14} /> Sign Out
             </button>
           </div>
         </div>
