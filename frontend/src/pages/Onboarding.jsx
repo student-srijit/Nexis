@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Send, Sparkles, Brain, Target, Clock, ChevronRight, CheckCircle2, Loader2 } from 'lucide-react'
 import { useStore } from '../utils/store'
 import { createProfile, submitQuiz, generatePath } from '../utils/api'
-import { saveUserProfile, saveUserPath, saveUserMastery } from '../utils/firebase'
+import { saveUserProfile, saveUserPath, saveUserMastery, signOutUser } from '../utils/firebase'
 import toast from 'react-hot-toast'
 
 const EXAMPLE_GOALS = [
@@ -104,6 +104,23 @@ export default function Onboarding() {
       <div style={{ position: 'fixed', top: '10%', left: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
       <div style={{ position: 'fixed', top: '40%', right: '5%', width: 350, height: 350, borderRadius: '50%', background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
       <div style={{ position: 'fixed', bottom: '10%', left: '30%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(236,72,153,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <button 
+        onClick={() => {
+          signOutUser().then(() => {
+            setStorePhase('landing')
+            toast.success('Signed out')
+          })
+        }}
+        style={{
+          position: 'absolute', top: '24px', right: '24px',
+          background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)',
+          cursor: 'pointer', fontSize: '0.8rem', padding: '8px 16px', borderRadius: 'var(--radius-full)',
+          zIndex: 10
+        }}
+      >
+        Sign Out
+      </button>
 
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh', alignItems: 'center', justifyContent: 'center', padding: '40px 24px' }}>
 
