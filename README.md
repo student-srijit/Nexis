@@ -192,11 +192,6 @@ nexis/
 
 ---
 
-## 👥 Team
-
-Built for international hackathon · 2026
-
----
 
 ## 📄 License
 
