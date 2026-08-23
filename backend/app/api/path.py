@@ -113,14 +113,8 @@ async def generate_path(
     path_steps_dicts = [s.model_dump() for s in path.steps]
 
     for step in path.steps:
-        try:
-            step.why_recommended = explainer.explain_course(
-                step.course_id, learner_dict, path_steps_dicts, mastery,
-                conversation_history=[],
-            )
-        except Exception as e:
-            logger.warning("Explainer failed for %s: %s", step.course_id, e)
-            step.why_recommended = f"Recommended to close your gap in {', '.join(step.skills_taught[:2])}."
+        skills_str = ", ".join(step.skills_taught[:2])
+        step.why_recommended = f"Recommended to close your gap in {skills_str}."
 
     # Save path to DB
     path_row = PathRow(
