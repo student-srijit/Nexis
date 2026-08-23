@@ -24,7 +24,7 @@ const FEATURES = [
     icon: Target,
     color: '#06b6d4',
     title: 'ESCO Skill Graph',
-    desc: 'Your skill gaps are computed via Dijkstra's shortest-path over a 14K-node ESCO occupational ontology. Node2Vec embeddings fuse structural graph signal with content.',
+    desc: `Your skill gaps are computed via Dijkstra's shortest-path over a 14K-node ESCO occupational ontology. Node2Vec embeddings fuse structural graph signal with content.`,
     badge: 'Node2Vec'
   },
   {
