@@ -29,8 +29,8 @@ def main():
     # 1. Create .env if not exists
     env_path = ROOT / ".env"
     if not env_path.exists():
-        env_path.write_text("GEMINI_API_KEY=\n# Get free key at: https://aistudio.google.com/app/apikey\n")
-        print("✓ Created .env (add your GEMINI_API_KEY for AI explanations)")
+        env_path.write_text("OPENROUTER_API_KEY=\n# Get a free key at: https://openrouter.ai/\n")
+        print("✓ Created .env (add your OPENROUTER_API_KEY for AI explanations)")
 
     # 2. Install Python deps
     print("\n📦 Installing Python dependencies…")
@@ -68,7 +68,9 @@ def main():
     print("\nFrontend: http://localhost:5173")
     print("Backend:  http://localhost:8000")
     print("API docs: http://localhost:8000/docs")
-    print("\n💡 Add GEMINI_API_KEY to .env for AI explanations (free tier)")
+    print("\n💡 Add OPENROUTER_API_KEY to .env for AI explanations (free tier)")
 
 if __name__ == "__main__":
     main()
+
+

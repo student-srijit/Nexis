@@ -52,6 +52,23 @@ async def create_profile(
     unknown_skills = [s for s in all_skills if s not in known_skills]
     mastery_model.initialize_from_known_skills(body.learner_id, known_skills, unknown_skills)
 
+    # Persist the pre-warmed mastery values too, or the mastery/radar endpoint
+    # stays empty until the learner finishes the diagnostic quiz.
+    initial_mastery = mastery_model.get_all_mastery(body.learner_id, all_skills)
+    for skill_id, p_mastery in initial_mastery.items():
+        result = await db.execute(
+            select(MasteryRow).where(
+                MasteryRow.learner_id == body.learner_id,
+                MasteryRow.skill_id == skill_id,
+            )
+        )
+        row = result.scalar_one_or_none()
+        if row:
+            row.p_mastery = p_mastery
+            row.updated_at = datetime.datetime.utcnow()
+        else:
+            db.add(MasteryRow(learner_id=body.learner_id, skill_id=skill_id, p_mastery=p_mastery))
+
     # Persist to DB
     existing = await db.get(LearnerRow, body.learner_id)
     if existing:

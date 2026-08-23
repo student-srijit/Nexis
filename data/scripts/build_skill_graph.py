@@ -143,10 +143,15 @@ def build_skill_graph():
     logger.info("OK Skill graph saved: %d nodes, %d edges",
                 sg.G.number_of_nodes(), sg.G.number_of_edges())
                 
-    # --- 7. Stretch Goal: Node2Vec Embeddings ---
+    # --- 7. Stretch Goal: Node2Vec Embeddings (optional) ---
+    try:
+        from gensim.models import Word2Vec
+    except ImportError:
+        logger.warning("gensim not installed - skipping Node2Vec stretch step")
+        return sg
+
     logger.info("Generating random walks for Node2Vec...")
     import random
-    from gensim.models import Word2Vec
     
     walks = []
     nodes = list(sg.G.nodes())

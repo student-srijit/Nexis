@@ -129,7 +129,7 @@ python setup.py
 
 # Then build and run
 cp .env.example .env
-# Edit .env and add GEMINI_API_KEY (optional but recommended)
+# Edit .env and add OPENROUTER_API_KEY (optional but recommended)
 docker-compose up --build
 ```
 
@@ -196,3 +196,5 @@ nexis/
 ## 📄 License
 
 MIT
+
+
