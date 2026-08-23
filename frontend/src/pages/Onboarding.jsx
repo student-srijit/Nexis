@@ -90,9 +90,13 @@ export default function Onboarding() {
       setStorePhase('dashboard')
       toast.success('🎉 Your personalized learning path is ready!')
     } catch (err) {
-      const msg = err.response?.data?.detail || 'Error generating path.'
-      toast.error(msg)
-      setPhase(PHASES.QUIZ)
+      if (err.response?.status === 404) {
+        toast.error("Server restarted. Please re-enter your goal to continue.")
+        setPhase(PHASES.GOAL)
+      } else {
+        const msg = err.response?.data?.detail || 'Error generating path.'
+        toast.error(msg)
+      }
     } finally {
       setQuizSubmitting(false)
     }
